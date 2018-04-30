@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <title>GitHub Authentication Example</title>
+
+  <!-- Make sure to include Nelify's authentiation library -->
+  <!-- Also available via npm as netlify-auth-providers -->
+  <script src="https://unpkg.com/netlify-auth-providers"></script>
+
+  <script>
+      function login(e) {
+        e.preventDefault();
+        var authenticator = new netlify.default({});
+        authenticator.authenticate({provider:"github", scope: ""}, function(err, data) {
+          if (err) {
+            return document.getElementById('output').innerText = ("Error Authenticating with GitHub: " + err);
+          }
+          document.getElementById('output').innerText = ("Authenticated with GitHub. Access Token: " + data.token);
+        });
+      }
+  </script>
+</head>
+<body>
+  <h1>GitHub Auth Demo:</h1>
+  <p><a href="#" id="login" onclick="login">Authenticate</a></p>
+  <p id="output"></p>
+</body>
+</html>
